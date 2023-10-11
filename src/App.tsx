@@ -1,21 +1,34 @@
 import React from 'react';
-import Layout from './components/layout';
+import Layout from './components/Layout';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/home';
-import Page2 from './pages/page2';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
+import SharePage from './pages/share';
+import LoginPage from './pages/login';
+import RegisterPage from './pages/register';
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.accessToken);
   return (
     <Layout>
       <Routes>
-        <Route index element={<HomePage />} />
         {isLoggedIn ? (
-          <Route path="/page2" element={<Page2 />} />
+          <Route index element={<HomePage />} />
         ) : null}
-        <Route path="*" element={<Navigate to="/" />} />
+
+        {isLoggedIn ? (
+          <Route path="/share" element={<SharePage />} />
+        ) : null}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        {isLoggedIn
+          ?
+          <Route path="*" element={<Navigate to="/" />} />
+          :
+          <Route path="*" element={<Navigate to="/login" />} />
+        }
       </Routes>
     </Layout>
   );

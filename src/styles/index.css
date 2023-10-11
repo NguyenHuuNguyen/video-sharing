@@ -2,14 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @font-face {
-  font-family: 'Podkova';
-  src: url('/public/asset/fonts/Podkova-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-} */
-
 body {
-  font-family: 'Podkova', sans-serif;
+  font-family: sans-serif;
   background: #FFF;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-shadow {
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

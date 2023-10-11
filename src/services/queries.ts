@@ -1,4 +1,3 @@
-import { IVideoResponse } from './../interfaces/IVideoResponse';
 import { ICreateVideoResponse } from "../interfaces/ICreateVideoResponse";
 import { ILoginResponse } from "../interfaces/ILoginResponse";
 import { IRateVideoResponse } from "../interfaces/IRateVideoResponse";
@@ -13,7 +12,7 @@ export function useGetVideos(
 ) {
   return useQuery(
     "get-videos-list",
-    (): Promise<IVideoResponse> =>
+    (): Promise<any> =>
       requestHandler.get(`videos?limit=${limit}&currentPage=${currentPage}&sortBy=${sortBy}`)
   );
 }

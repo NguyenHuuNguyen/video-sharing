@@ -2,60 +2,48 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { RootState } from '../../store';
-import { setShowLogin, resetAuthData } from '../../store';
+import { resetAuthData } from '../../store';
+import { AiFillYoutube } from 'react-icons/ai';
 
 const Navigator: React.FC = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.accessToken);
+  const userEmail = useSelector((state: RootState) => state.auth.email);
   const dispatch = useDispatch();
-
-  const handleLoginClick = () => {
-    dispatch(setShowLogin(true));
-  };
 
   const handleLogoutClick = () => {
     dispatch(resetAuthData());
   };
 
   return (
-    <div className='w-[300px] h-full flex-shrink-0 box-shadow px-3 py-5 fixed'>
-      <div className='flex flex-col'>
-        <div className='flex gap-3'>
-          <img src='/asset/images/ShoppingIcon.png' className='w-[40px] h-[40px]' alt='shopping icon' />
-          <p className='text-[28px] font-[400]'>Video sharing</p>
+    <div className='w-full h-100px flex-shrink-0 shadow-xl fixed flex justify-between bg-grey p-5 px-10 top-0'>
+      <NavLink to='/' className='flex items-center gap-3'>
+        <div className='rounded-full bg-red-logo p-2'>
+          <AiFillYoutube color='white' size={30}></AiFillYoutube>
         </div>
-        <div className='mt-7 flex flex-col gap-4'>
-          <div className='flex gap-2 items-center'>
-            <NavLink to="/" className='text-[28px] font-[400] flex gap-2 items-center'>
-              <img src='/asset/images/Home.png' alt='Home' className='w-[24px] h-[24px]' />
-              Home
-            </NavLink>
-          </div>
-          {isLoggedIn ? (
-            <>
-              <div className='flex gap-2 items-center'>
-                <NavLink to="/page2" className='text-[28px] font-[400] flex gap-2 items-center'>
-                  <img src='/asset/images/User_alt.png' alt='Profile' className='w-[24px] h-[24px]' />
-                  Page2
-                </NavLink>
-              </div>
-              <button
-                className='bg-[#08C03C] rounded-[8px] flex-shrink-0 w-[260px] h-[44px] text-[28px] font-[700] text-white'
-                onClick={handleLogoutClick}
-              >
-                LOGOUT
-              </button>
-            </>
-          ) : (
-            <button
-              className='bg-[#08C03C] rounded-[8px] flex-shrink-0 w-[260px] h-[44px] text-[28px] font-[700] text-white'
-              onClick={handleLoginClick}
-            >
-              LOGIN
-            </button>
-          )}
-        </div>
+        <p className='text-red-text text-3xl font-extrabold text-shadow'>Youtube Videos Sharing</p>
+      </NavLink>
+      <div className='font-medium text-base flex justify-center'>
+        {
+          isLoggedIn
+            ?
+            <div className='flex gap-4 items-center'>
+
+              <NavLink to='/share'>
+                <button className='bg-blue text-white w-24 h-10 rounded'>Share</button>
+              </NavLink>
+              <p className='text-blue hover:cursor-pointer' onClick={handleLogoutClick}>Welcome {userEmail}</p>
+            </div>
+            :
+            <div className='flex gap-3 items-center'>
+              <NavLink to='/login'>
+                <button className='bg-blue text-white w-24 h-10 rounded'>Login</button>
+              </NavLink>
+              <NavLink to='/register'>
+                <button className='bg-grey text-blue w-24 h-10 rounded'>Register</button>
+              </NavLink>
+            </div>
+        }
       </div>
-      <div></div>
     </div>
   );
 };

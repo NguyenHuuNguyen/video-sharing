@@ -10,12 +10,12 @@ export interface IVideo {
   dislikeCount?: string;
   thumbnail?: string;
   sharedBy?: {
-    id: string;
-    isActive: boolean;
-    createdAt: string;
-    updatedAt: string;
-    email: string;
-    firstName: string;
-    lastName: string;
+    id?: string;
+    isActive?: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+    email?: string;
+    firstName?: string;
+    lastName?: string;
   };
 }

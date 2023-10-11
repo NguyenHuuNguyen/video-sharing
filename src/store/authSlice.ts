@@ -4,26 +4,25 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     accessToken: localStorage.getItem('accessToken'),
-    isShowLogin: false,
     userId: localStorage.getItem('userId'),
+    email:  localStorage.getItem('email'),
   },
   reducers: {
     setAuthData: (state, action) => {
-      state.isShowLogin = false;
       state.accessToken = action.payload.accessToken;
-      localStorage.setItem('accessToken', action.payload.token);
+      state.email = action.payload.email;
+      localStorage.setItem('accessToken', action.payload.accessToken);
       localStorage.setItem('userId', action.payload.id);
+      localStorage.setItem('email', action.payload.email);
     },
     resetAuthData: (state) => {
       state.accessToken = '';
+      state.email = '';
       localStorage.setItem('accessToken', '');
-      localStorage.setItem('userId', '');
-    },
-    setShowLogin: (state, action) => {
-      state.isShowLogin = action.payload;
+      localStorage.setItem('email', '');
     },
   },
 });
 
-export const { setAuthData, resetAuthData, setShowLogin } = authSlice.actions;
+export const { setAuthData, resetAuthData } = authSlice.actions;
 export default authSlice.reducer;
